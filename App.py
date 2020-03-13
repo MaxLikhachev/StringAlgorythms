@@ -1,7 +1,6 @@
 import sys
-from Naive import *
+from algorythm import *
 from PyQt5.QtWidgets import *
-from termcolor import *
 
 class App(QMainWindow):
 
@@ -25,11 +24,27 @@ class App(QMainWindow):
         fileMenu = menubar.addMenu('File')
         fileMenu.addAction(openFile)
 
-        chooseAlgorythmNaive = QAction('Naive', self)
-        chooseAlgorythmNaive.setStatusTip('Open new File')
-        chooseAlgorythmNaive.triggered.connect(self.showNaiveAlgorytmDialog)
+        chooseNaiveAlgorythm = QAction('Naive', self)
+        chooseNaiveAlgorythm.triggered.connect(self.showNaiveAlgorythmDialog)
+
+        chooseNaiveMaxBorderAlgorythm = QAction('NaiveMaxBorder', self)
+        chooseNaiveMaxBorderAlgorythm.triggered.connect(self.showNaiveMaxBorderAlgorythmDialog)
+
+        choosePrefixBorderArrayAlgorythm = QAction('PrefixBorderArray', self)
+        choosePrefixBorderArrayAlgorythm.triggered.connect(self.showPrefixBorderArrayAlgorythmDialog)
+
+        chooseSuffixBorderArrayAlgorythm = QAction('SuffixBorderArray', self)
+        chooseSuffixBorderArrayAlgorythm.triggered.connect(self.showSuffixBorderArrayAlgorythmDialog)
+
+        choosePrefixBorderArrayModifiedAlgorythm = QAction('PrefixBorderArrayModified', self)
+        choosePrefixBorderArrayModifiedAlgorythm.triggered.connect(self.showPrefixBorderArrayModifiedAlgorythmDialog)
+
         fileMenu = menubar.addMenu('Algorythm')
-        fileMenu.addAction(chooseAlgorythmNaive)
+        fileMenu.addAction(chooseNaiveAlgorythm)
+        fileMenu.addAction(chooseNaiveMaxBorderAlgorythm)
+        fileMenu.addAction(choosePrefixBorderArrayAlgorythm)
+        fileMenu.addAction(chooseSuffixBorderArrayAlgorythm)
+        fileMenu.addAction(choosePrefixBorderArrayModifiedAlgorythm)
 
         self.setGeometry(300, 300, 650, 300)
         self.setWindowTitle('Entry string')
@@ -42,15 +57,39 @@ class App(QMainWindow):
             self.textEdit.setText(file.read())
 
 
-    def showNaiveAlgorytmDialog(self):
-        if self.textEdit.toPlainText() == "": 
-            self.statusBar().showMessage(str(colored('Entry string is empty','red')))
-        else: 
-            text, ok = QInputDialog.getText(self, 'Input Dialog', 'Enter pattern:')
-            if ok:
-                naive = Naive(self.textEdit.toPlainText(),text)
-                self.statusBar().showMessage(naive.__str__())
+    def isStringEmpty(self):
+        isEmpty = self.textEdit.toPlainText() == ""
+        if isEmpty:
+            self.statusBar().showMessage(str('Entry string is empty'))
+        return isEmpty
 
+
+    def showNaiveAlgorythmDialog(self):
+        if not self.isStringEmpty(): 
+            text, ok = QInputDialog.getText(self, 'Enter pattern', 'Enter pattern:')
+            if ok:
+                self.statusBar().showMessage(Naive(self.textEdit.toPlainText(),text).__str__())
+
+
+    def showNaiveMaxBorderAlgorythmDialog(self):
+        if not self.isStringEmpty():
+            self.statusBar().showMessage(NaiveMaxBorder(self.textEdit.toPlainText()).__str__())
+
+
+    def showPrefixBorderArrayAlgorythmDialog(self):
+        if not self.isStringEmpty():
+            self.statusBar().showMessage(PrefixBorderArray(self.textEdit.toPlainText()).__str__())
+
+
+    def showSuffixBorderArrayAlgorythmDialog(self):
+        if not self.isStringEmpty():
+            self.statusBar().showMessage(SuffixBorderArray(self.textEdit.toPlainText()).__str__())
+    
+
+    def showPrefixBorderArrayModifiedAlgorythmDialog(self):
+        if not self.isStringEmpty():
+            self.statusBar().showMessage(PrefixBorderArrayModified(self.textEdit.toPlainText()).__str__())
+    
 
 if __name__ == '__main__':
 
