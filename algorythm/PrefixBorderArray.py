@@ -1,6 +1,6 @@
 import re
 
-class PrefixborderPrefixs:
+class PrefixBorderArray:
 
 
     def __init__(self, string):

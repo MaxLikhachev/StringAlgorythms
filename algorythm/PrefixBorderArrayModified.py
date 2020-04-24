@@ -6,7 +6,7 @@ class PrefixBorderArrayModified:
 
     def __init__(self, string):
         self.string = string
-        self.borderArray = algorythm.PrefixBorderArray(string).borderArray
+        self.borderArray = algorythm.PrefixBorderArray(string).borderPrefixs
         self.borderArrayModified = [0 for i in range(0,len(self.string))]
 
         self.execute()

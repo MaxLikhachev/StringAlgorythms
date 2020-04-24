@@ -1,11 +1,11 @@
 import re
 
-class SuffixborderSuffixs:
+class SuffixBorderArray:
 
 
     def __init__(self, string):
         self.string = string
-        self.borderSuffixs = [0 for i in range(0,len(self.string))]
+        self.borderSuffixs = [0 for i in range(len(self.string))]
 
         self.execute()
 
@@ -13,7 +13,7 @@ class SuffixborderSuffixs:
     def execute(self):
         n = len(self.string) 
         self.borderSuffixs[n - 1] = 0
-        for i in range(n-2,0):
+        for i in range(n-2, -1, -1):
             borderSuffixLeft = self.borderSuffixs[i + 1]
             
             while borderSuffixLeft and (self.string[i] != self.string[n - borderSuffixLeft - 1]): 

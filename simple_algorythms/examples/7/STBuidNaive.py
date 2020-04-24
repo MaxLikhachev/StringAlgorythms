@@ -106,15 +106,7 @@ def STLeavesTraversal (pStartArc, nAlpha = NAlpha()): # pStartArc – старт
                 pArc = pStartNode.arcs[k]
                 if (pArc): 
                     STLeavesTraversal(pArc)
-"""
-def GetSuffixes(pTree, substr = ''):
-    # suffixes = []
-    for i in range(0, len(pTree.arcs)): 
-        if not pTree.arcs[i].pDestVert is None:
-            substr += chr(i + ord('a'))
-            print(substr)
-            GetSuffixes(pTree.arcs[i].pDestVert, substr)
-"""
+
 
 if __name__ == "__main__":
     # print(ord('z') - ord('a'))
