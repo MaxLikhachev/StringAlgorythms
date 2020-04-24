@@ -1,8 +1,8 @@
 def NAlpha(): # nAlpha – длина алфавита
-    return ord('z') - ord('a') + 1
+    return ord('z') - ord('0') + 1
 
 def CHArcIdx(chArcIdx): # Определение индекса (кода) символа
-    return ord(chArcIdx) - ord('a')
+    return ord(chArcIdx) - ord('0')
 
 class Arc:
     def __init__(self, iBeg = 0, iEnd = 0, pDestVert = None, iDestVert = 0):
@@ -51,8 +51,6 @@ def FindSuffixTreeArc(str, substr, m, pTree, idxSubstr, idxArc):
             pArc = pNextArc
             idxArc = pArc.iBeg
             # Сравниваем последующие символы
-            # print(substr, idxSubstr, str, idxArc)
-            #TODO check
             while idxSubstr < m and idxArc < pArc.iEnd + 1 and substr[idxSubstr] == str[idxArc] and idxSubstr < len(substr) - 1 and idxArc < len(str) - 1:
                 idxSubstr += 1
                 idxArc += 1
@@ -109,14 +107,11 @@ def STLeavesTraversal (pStartArc, nAlpha = NAlpha()): # pStartArc – старт
 
 
 if __name__ == "__main__":
-    # print(ord('z') - ord('a'))
     str = 'abracadabra$'
     pTree = STBuidNaive(str)
-    print('String:', str)
-    print('Suffix tree:')
+    print('Строка:', str)
+    print('Суффиксное дерево:')
     print(pTree)
-
-    # GetSuffixes(pTree)
-    print('ST-Leaves-Traversal:')
+    print('Обход дочерних листьев:')
     for arc in pTree.arcs: 
         STLeavesTraversal(arc) 
